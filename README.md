@@ -7,11 +7,11 @@ In this lab, we shall put into practice, the skills shown in the previous code a
 
 ## Objectives
 You will be able to:
-- Conduct a regression experiment using CART trees.
+- Conduct a regression experiment using CART trees
 - Evaluate the model fit and study the impact of hyper parameters on the final tree
-- Understand training, prediction, evaluation and visualizations required to run regression experiments using trees. 
+- Understand training, prediction, evaluation and visualizations required to run regression experiments using trees
 
-## Import Necessary libraries 
+## Import necessary libraries 
 
 
 ```python
