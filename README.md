@@ -3,7 +3,7 @@
 
 ## Introduction
 
-In this lab, we shall put into practice, the skills shown in the previous code along. We shall use a simple dataset from Kaggle, called the ["Petrol Consumption Dataset"](https://www.kaggle.com/harinir/petrol-consumption) which entails the petrol consumption for a bunch of examples, based on drivers' features.
+In this lab, we'll make use of what we learned in the previous lesson to build a model for the ["Petrol Consumption Dataset"](https://www.kaggle.com/harinir/petrol-consumption)from Kaggle. This model will be used to predict gasoline consumption for a bunch of examples, based on drivers' features.
 
 ## Objectives
 You will be able to:
@@ -34,7 +34,7 @@ dataset.head()
 ```
 
     (48, 5)
-
+    
 
 
 
@@ -256,7 +256,15 @@ regressor.fit(X_train, y_train)
 
  ## Using test set, make predictions and calculate the MAE, MSE and RMSE
  
-To evaluate performance of the regression algorithm, the commonly used metrics are mean absolute error, mean squared error, and root mean squared error. The `sklearn` library contains functions that can help calculate these values for us. To do so, use this code from the `metrics` package.
+Just as with Decision Trees for classification, there are several commonly used metrics for evaluating the performance of our model. The most common metrics are:
+
+* Mean Absolute Error (MAE)
+* Mean Squared Error (MSE)
+* Root Mean Squared Error (RMSE)
+
+If these look familiar, its likely because you have already seen them before--they are common evaluation metrics for any sort of regression model, and as we can see, Regressions performed with Decision Tree models are no exception!
+
+Since these are common evaluation metrics, sklearn has functions for each of them that we can use to make our job easier. You'll find these functions inside the metrics module. In the cell below, calculate each of the three evaluation metrics listed above!
 
 
 ```python
@@ -272,31 +280,7 @@ print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_test, y_p
     Mean Absolute Error: 55.6
     Mean Squared Error: 6286.2
     Root Mean Squared Error: 79.28555984540942
-
-
-## Visualize the tree using `graphviz`
-
-Let's visualize our learnt tree as we have been doing in previous lessons and labs. 
-
-
-```python
-# Visualize the decision tree using graph viz library 
-from sklearn.externals.six import StringIO  
-from IPython.display import Image  
-from sklearn.tree import export_graphviz
-import pydotplus
-dot_data = StringIO()
-export_graphviz(regressor, out_file=dot_data, filled=True, rounded=True,special_characters=True)
-graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
-Image(graph.create_png())
-```
-
-
-
-
-![png](index_files/index_14_0.png)
-
-
+    
 
 ## Level Up - Optional 
 
