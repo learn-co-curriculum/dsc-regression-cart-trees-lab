@@ -3,7 +3,7 @@
 
 ## Introduction
 
-In this lab, we'll make use of what we learned in the previous lesson to build a model for the ["Petrol Consumption Dataset"](https://www.kaggle.com/harinir/petrol-consumption)from Kaggle. This model will be used to predict gasoline consumption for a bunch of examples, based on drivers' features.
+In this lab, we'll make use of what we learned in the previous lesson to build a model for the ["Petrol Consumption Dataset"](https://www.kaggle.com/harinir/petrol-consumption) from Kaggle. This model will be used to predict gasoline consumption for a bunch of examples, based on drivers' features.
 
 ## Objectives
 You will be able to:
@@ -20,7 +20,6 @@ import pandas as pd
 import numpy as np  
 import matplotlib.pyplot as plt  
 %matplotlib inline
-
 ```
 
 ## Read the dataset `petrol_consumption.csv` and view its head and dimensions
@@ -34,7 +33,7 @@ dataset.head()
 ```
 
     (48, 5)
-    
+
 
 
 
@@ -239,7 +238,7 @@ As mentioned earlier, for a regression task we'll use a different `sklearn` clas
 ```python
 # Train a regression tree model with training data 
 from sklearn.tree import DecisionTreeRegressor  
-regressor = DecisionTreeRegressor()  
+regressor = DecisionTreeRegressor(random_state=0)  
 regressor.fit(X_train, y_train)  
 ```
 
@@ -247,10 +246,10 @@ regressor.fit(X_train, y_train)
 
 
     DecisionTreeRegressor(criterion='mse', max_depth=None, max_features=None,
-               max_leaf_nodes=None, min_impurity_decrease=0.0,
-               min_impurity_split=None, min_samples_leaf=1,
-               min_samples_split=2, min_weight_fraction_leaf=0.0,
-               presort=False, random_state=None, splitter='best')
+                          max_leaf_nodes=None, min_impurity_decrease=0.0,
+                          min_impurity_split=None, min_samples_leaf=1,
+                          min_samples_split=2, min_weight_fraction_leaf=0.0,
+                          presort=False, random_state=0, splitter='best')
 
 
 
@@ -262,9 +261,9 @@ Just as with Decision Trees for classification, there are several commonly used 
 * Mean Squared Error (MSE)
 * Root Mean Squared Error (RMSE)
 
-If these look familiar, its likely because you have already seen them before--they are common evaluation metrics for any sort of regression model, and as we can see, Regressions performed with Decision Tree models are no exception!
-
-Since these are common evaluation metrics, sklearn has functions for each of them that we can use to make our job easier. You'll find these functions inside the metrics module. In the cell below, calculate each of the three evaluation metrics listed above!
+If these look familiar, it's likely because you have already seen them before--they are common evaluation metrics for any sort of regression model, and as we can see, regressions performed with Decision Tree models are no exception!
+ 
+Since these are common evaluation metrics, sklearn has functions for each of them that we can use to make our job easier. You'll find these functions inside the `metrics` module. In the cell below, calculate each of the three evaluation metrics listed above!
 
 
 ```python
@@ -277,10 +276,10 @@ print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred))
 print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
 ```
 
-    Mean Absolute Error: 55.6
-    Mean Squared Error: 6286.2
-    Root Mean Squared Error: 79.28555984540942
-    
+    Mean Absolute Error: 50.8
+    Mean Squared Error: 4535.4
+    Root Mean Squared Error: 67.34537846058926
+
 
 ## Level Up - Optional 
 
