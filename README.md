@@ -30,7 +30,6 @@ import pandas as pd
 import numpy as np  
 import matplotlib.pyplot as plt  
 %matplotlib inline
-
 ```
 
 ## Read the dataset `petrol_consumption.csv` and view its head and dimensions
@@ -41,84 +40,6 @@ import matplotlib.pyplot as plt
 
 # Code here
 ```
-
-    (48, 5)
-
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Petrol_tax</th>
-      <th>Average_income</th>
-      <th>Paved_Highways</th>
-      <th>Population_Driver_licence(%)</th>
-      <th>Petrol_Consumption</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>9.0</td>
-      <td>3571</td>
-      <td>1976</td>
-      <td>0.525</td>
-      <td>541</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>9.0</td>
-      <td>4092</td>
-      <td>1250</td>
-      <td>0.572</td>
-      <td>524</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>9.0</td>
-      <td>3865</td>
-      <td>1586</td>
-      <td>0.580</td>
-      <td>561</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>7.5</td>
-      <td>4870</td>
-      <td>2351</td>
-      <td>0.529</td>
-      <td>414</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>8.0</td>
-      <td>4399</td>
-      <td>431</td>
-      <td>0.544</td>
-      <td>410</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
 
 
 ```python
@@ -215,105 +136,6 @@ dataset.head()
 
 # Code here
 ```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Petrol_tax</th>
-      <th>Average_income</th>
-      <th>Paved_Highways</th>
-      <th>Population_Driver_licence(%)</th>
-      <th>Petrol_Consumption</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>48.000000</td>
-      <td>48.000000</td>
-      <td>48.000000</td>
-      <td>48.000000</td>
-      <td>48.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>7.668333</td>
-      <td>4241.833333</td>
-      <td>5565.416667</td>
-      <td>0.570333</td>
-      <td>576.770833</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>0.950770</td>
-      <td>573.623768</td>
-      <td>3491.507166</td>
-      <td>0.055470</td>
-      <td>111.885816</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>5.000000</td>
-      <td>3063.000000</td>
-      <td>431.000000</td>
-      <td>0.451000</td>
-      <td>344.000000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>7.000000</td>
-      <td>3739.000000</td>
-      <td>3110.250000</td>
-      <td>0.529750</td>
-      <td>509.500000</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>7.500000</td>
-      <td>4298.000000</td>
-      <td>4735.500000</td>
-      <td>0.564500</td>
-      <td>568.500000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>8.125000</td>
-      <td>4578.750000</td>
-      <td>7156.000000</td>
-      <td>0.595250</td>
-      <td>632.750000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>10.000000</td>
-      <td>5342.000000</td>
-      <td>17782.000000</td>
-      <td>0.724000</td>
-      <td>968.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
 
 
 ```python
@@ -456,22 +278,11 @@ As mentioned earlier, for a regression task we'll use a different `sklearn` clas
 ```
 
 
-
-
-    DecisionTreeRegressor(criterion='mse', max_depth=None, max_features=None,
-               max_leaf_nodes=None, min_impurity_decrease=0.0,
-               min_impurity_split=None, min_samples_leaf=1,
-               min_samples_split=2, min_weight_fraction_leaf=0.0,
-               presort=False, random_state=None, splitter='best')
-
-
-
-
 ```python
 # __SOLUTION__ 
 # Train a regression tree model with training data 
 from sklearn.tree import DecisionTreeRegressor  
-regressor = DecisionTreeRegressor()  
+regressor = DecisionTreeRegressor(random_state=0)  
 regressor.fit(X_train, y_train)  
 ```
 
@@ -479,10 +290,10 @@ regressor.fit(X_train, y_train)
 
 
     DecisionTreeRegressor(criterion='mse', max_depth=None, max_features=None,
-               max_leaf_nodes=None, min_impurity_decrease=0.0,
-               min_impurity_split=None, min_samples_leaf=1,
-               min_samples_split=2, min_weight_fraction_leaf=0.0,
-               presort=False, random_state=None, splitter='best')
+                          max_leaf_nodes=None, min_impurity_decrease=0.0,
+                          min_impurity_split=None, min_samples_leaf=1,
+                          min_samples_split=2, min_weight_fraction_leaf=0.0,
+                          presort=False, random_state=0, splitter='best')
 
 
 
@@ -494,7 +305,7 @@ Just as with Decision Trees for classification, there are several commonly used 
 * Mean Squared Error (MSE)
 * Root Mean Squared Error (RMSE)
 
-If these look familiar, its likely because you have already seen them before--they are common evaluation metrics for any sort of regression model, and as we can see, Regressions performed with Decision Tree models are no exception!
+If these look familiar, it's likely because you have already seen them before--they are common evaluation metrics for any sort of regression model, and as we can see, regressions performed with Decision Tree models are no exception!
  
 Since these are common evaluation metrics, sklearn has functions for each of them that we can use to make our job easier. You'll find these functions inside the `metrics` module. In the cell below, calculate each of the three evaluation metrics listed above!
 
@@ -505,11 +316,6 @@ Since these are common evaluation metrics, sklearn has functions for each of the
 
 # Code here
 ```
-
-    Mean Absolute Error: 55.6
-    Mean Squared Error: 6286.2
-    Root Mean Squared Error: 79.28555984540942
-
 
 
 ```python
@@ -523,9 +329,9 @@ print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred))
 print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
 ```
 
-    Mean Absolute Error: 55.6
-    Mean Squared Error: 6286.2
-    Root Mean Squared Error: 79.28555984540942
+    Mean Absolute Error: 50.8
+    Mean Squared Error: 4535.4
+    Root Mean Squared Error: 67.34537846058926
 
 
 ## Level Up - Optional 
