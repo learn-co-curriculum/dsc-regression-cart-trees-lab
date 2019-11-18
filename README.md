@@ -3,13 +3,13 @@
 
 ## Introduction
 
-In this lab, we'll make use of what we learned in the previous lesson to build a model for the ["Petrol Consumption Dataset"](https://www.kaggle.com/harinir/petrol-consumption) from Kaggle. This model will be used to predict gasoline consumption for a bunch of examples, based on drivers' features.
+In this lab, we'll make use of what we learned in the previous lesson to build a model for the [Petrol Consumption Dataset](https://www.kaggle.com/harinir/petrol-consumption) from Kaggle. This model will be used to predict gasoline consumption for a bunch of examples, based on drivers' features.
 
 ## Objectives
-You will be able to:
-- Conduct a regression experiment using CART trees
-- Evaluate the model fit and study the impact of hyper parameters on the final tree
-- Understand training, prediction, evaluation and visualizations required to run regression experiments using trees
+
+In this lab you will: 
+
+- Fit a decision tree regression model with scikit-learn
 
 ## Import necessary libraries 
 
@@ -18,22 +18,26 @@ You will be able to:
 # Import libraries 
 import pandas as pd  
 import numpy as np  
-import matplotlib.pyplot as plt  
-%matplotlib inline
+from sklearn.model_selection import train_test_split 
 ```
 
-## Read the dataset `petrol_consumption.csv` and view its head and dimensions
+## The dataset 
+
+- Import the `'petrol_consumption.csv'` dataset 
+- Print the first five rows of the data 
+- Print the dimensions of the data 
 
 
 ```python
-# Read the dataset and view head and dimensions
+# Import the dataset
 dataset = pd.read_csv('petrol_consumption.csv')  
-print(dataset.shape)
-dataset.head()
 ```
 
-    (48, 5)
 
+```python
+# Print the first five rows
+dataset.head()
+```
 
 
 
@@ -110,7 +114,20 @@ dataset.head()
 
 
 
-## Check the basic statistics for the dataset and inspect the target variable `Petrol_Consumption`
+
+```python
+# Print the dimensions of the data
+dataset.shape
+```
+
+
+
+
+    (48, 5)
+
+
+
+- Print the summary statistics of all columns in the data: 
 
 
 ```python
@@ -217,17 +234,19 @@ dataset.describe()
 
 
 
-## Create features, labels and train/test datasets with a 80/20 split
+## Create training and test sets
 
-As with the classification task, we will divide our data into attributes/features and labels and consequently into training and test sets.
+- Assign the target column `'Petrol_Consumption'` to `y` 
+- Assign the remaining independent variables to `X` 
+- Split the data into training and test sets using a 80/20 split 
+- Set the random state to 42 
 
 
 ```python
-# Create datasets for training and test
-from sklearn.model_selection import train_test_split 
+# Split the data into training and test sets
 X = dataset.drop('Petrol_Consumption', axis=1)  
 y = dataset['Petrol_Consumption']  
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 ```
 
 ## Create an instance of CART regressor and fit the data to the model 
@@ -236,9 +255,11 @@ As mentioned earlier, for a regression task we'll use a different `sklearn` clas
 
 
 ```python
-# Train a regression tree model with training data 
+# Import the DecisionTreeRegressor class 
 from sklearn.tree import DecisionTreeRegressor  
-regressor = DecisionTreeRegressor(random_state=0)  
+
+# Instantiate and fit a regression tree model to training data 
+regressor = DecisionTreeRegressor(random_state=42)  
 regressor.fit(X_train, y_train)  
 ```
 
@@ -249,48 +270,50 @@ regressor.fit(X_train, y_train)
                           max_leaf_nodes=None, min_impurity_decrease=0.0,
                           min_impurity_split=None, min_samples_leaf=1,
                           min_samples_split=2, min_weight_fraction_leaf=0.0,
-                          presort=False, random_state=0, splitter='best')
+                          presort=False, random_state=42, splitter='best')
 
 
 
- ## Using test set, make predictions and calculate the MAE, MSE and RMSE
- 
-Just as with Decision Trees for classification, there are several commonly used metrics for evaluating the performance of our model. The most common metrics are:
+## Make predictions and calculate the MAE, MSE, and RMSE
+
+Use the above model to generate predictions on the test set. 
+
+Just as with decision trees for classification, there are several commonly used metrics for evaluating the performance of our model. The most common metrics are:
 
 * Mean Absolute Error (MAE)
 * Mean Squared Error (MSE)
 * Root Mean Squared Error (RMSE)
 
-If these look familiar, it's likely because you have already seen them before--they are common evaluation metrics for any sort of regression model, and as we can see, regressions performed with Decision Tree models are no exception!
- 
-Since these are common evaluation metrics, sklearn has functions for each of them that we can use to make our job easier. You'll find these functions inside the `metrics` module. In the cell below, calculate each of the three evaluation metrics listed above!
+If these look familiar, it's likely because you have already seen them before -- they are common evaluation metrics for any sort of regression model, and as we can see, regressions performed with decision tree models are no exception!
+
+Since these are common evaluation metrics, `sklearn` has functions for each of them that we can use to make our job easier. You'll find these functions inside the `metrics` module. In the cell below, calculate each of the three evaluation metrics. 
 
 
 ```python
-# Predict and evaluate the predictions
+from sklearn.metrics import mean_absolute_error, mean_squared_error
 
-from sklearn import metrics
+# Make predictions on the test set
 y_pred = regressor.predict(X_test) 
-print('Mean Absolute Error:', metrics.mean_absolute_error(y_test, y_pred))  
-print('Mean Squared Error:', metrics.mean_squared_error(y_test, y_pred))  
-print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
+
+# Evaluate these predictions
+print('Mean Absolute Error:', mean_absolute_error(y_test, y_pred))  
+print('Mean Squared Error:', mean_squared_error(y_test, y_pred))  
+print('Root Mean Squared Error:', np.sqrt(mean_squared_error(y_test, y_pred)))
 ```
 
-    Mean Absolute Error: 50.8
-    Mean Squared Error: 4535.4
-    Root Mean Squared Error: 67.34537846058926
+    Mean Absolute Error: 94.3
+    Mean Squared Error: 17347.7
+    Root Mean Squared Error: 131.7106677532234
 
 
-## Level Up - Optional 
+## Level Up (Optional)
 
-- In order to understand and interpret a tree structure, we need some domain knowledge in which the data was generated. That can help us inspect each leaf and investigate/prune the tree based on qualitative analysis. 
+- Look at the hyperparameters used in the regression tree, check their value ranges in official doc and try running some optimization by growing a number of trees in a loop 
 
-- Look at the hyper parameters used in the regression tree, check their values ranges in official doc and try running some optimization by growing a number of trees in a loop. 
-
-- Use a dataset that you are familiar with and run tree regression to see if you can interpret the results.
+- Use a dataset that you are familiar with and run tree regression to see if you can interpret the results 
 
 - Check for outliers, try normalization and see the impact on the output 
 
 ## Summary 
 
-In this lesson, we developed a tree regressor architecture to train the regressor and predict values for unseen data. We saw that with a vanilla approach, the results were not so great, and this requires further pre-tuning of the model (what we described as hyper parameter optimization OR pruning in the case of trees. 
+In this lesson, you implemented the architecture to train a tree regressor and predict values for unseen data. You saw that with a vanilla approach, the results were not so great, and this requires further pre-tuning of the model (what we described as hyperparameter optimization and pruning in the case of trees). 
