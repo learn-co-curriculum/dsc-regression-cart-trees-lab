@@ -1,9 +1,8 @@
-
 # Regression with CART Trees - Lab
 
 ## Introduction
 
-In this lab, we'll make use of what we learned in the previous lesson to build a model for the [Petrol Consumption Dataset](https://www.kaggle.com/harinir/petrol-consumption) from Kaggle. This model will be used to predict gasoline consumption for a bunch of examples, based on drivers' features.
+In this lab, we'll make use of what we learned in the previous lesson to build a model for the [Petrol Consumption Dataset](https://www.kaggle.com/harinir/petrol-consumption) from Kaggle. This model will be used to predict gasoline consumption for a bunch of examples, based on features about the drivers.
 
 ## Objectives
 
@@ -387,4 +386,4 @@ print('Root Mean Squared Error:', np.sqrt(mean_squared_error(y_test, y_pred)))
 
 ## Summary 
 
-In this lesson, you implemented the architecture to train a tree regressor and predict values for unseen data. You saw that with a vanilla approach, the results were not so great, and this requires further pre-tuning of the model (what we described as hyperparameter optimization and pruning in the case of trees). 
+In this lesson, you implemented the architecture to train a tree regressor and predict values for unseen data. You saw that with a vanilla approach, the results were not so great, and thus we must further tune the model (what we described as hyperparameter optimization and pruning, in the case of trees). 
